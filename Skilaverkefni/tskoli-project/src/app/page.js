@@ -1,7 +1,9 @@
 export default function Home() {
   return (
     <body className="bg-black">
-      <img src="https://i.imgur.com/4M34hi2.png" className="w-1/2 h-1/2 mx-auto" />
+      <div id="nav" className="container mx-auto "> </div>
+      <div id="maincontent" className="container mx-auto"> </div>
+      <div id="footer" className="container mx-auto"> </div>
     </body>
   )
 }
