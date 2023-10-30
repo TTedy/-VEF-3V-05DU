@@ -18,11 +18,13 @@ við lærðum um double dimond theroy með því að velja mjög venjulega upp s
 
 <img src="https://media.discordapp.net/attachments/529814294997499925/1167417484081639424/20231027_104856.jpg?ex=654e0d41&is=653b9841&hm=fdfd43f68b2a3173bc2d6ef8e3db392dacccce9b647eefcddfb1d4e26d37425d&=&width=492&height=655"> </img>
 
+<img src="https://cdn.discordapp.com/attachments/1041445220233003040/1168616208824815698/Untitled.png?ex=655269a8&is=653ff4a8&hm=5630d8da87fa58872b26ee2aa5c68a31018831f7288757ebb2433f7984b7a814&"> </img>
+
 # Figma (mockups, prototype)
 
 í verkefna lýsingunni er ekki farið í hvernig þú villy fá mockup-ið eða prototype en hér er basic útlit af vefsiðuni
 
-<img src="https://media.discordapp.net/attachments/1041445220233003040/1168375340884824064/image.png?ex=65518954&is=653f1454&hm=02036f70c3ddee69d988989d9c299582efae111398cda088a47c24face5e01e1&=&width=675&height=271"> </img>
+<img src="https://cdn.discordapp.com/attachments/1041445220233003040/1168612285376381028/Skolaverk.png?ex=65526600&is=653ff100&hm=531cc015a6ab088039e2db22fa433718a3125bd6efa98284cdf936b3a1bffbe0&"> </img>
 
 
 
