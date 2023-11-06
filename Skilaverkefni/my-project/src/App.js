@@ -5,7 +5,7 @@ function App() {
   return (
     
     <body>
-      <nav class="bg-primary">
+      <nav class="bg-primary p-3">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <a href="#" class="flex items-center">
             <img src="../img/parkl.png" alt="park"/>
@@ -28,6 +28,30 @@ function App() {
           </div>
         </div>
       </nav>
+      <main>
+        <img src="Skilaverkefni\my-project\src\img\parking-lot-facebook 1.png"></img>
+      </main>
+      <footer class="bg-primary grid grid-cols-3 p-3 justify-center items-center">
+        <div class="grid grid-cols-1">
+          <h1>Tækniskólinn parking lot</h1>
+          Front and behind of Tækniskólinn
+          <p>Háteigsvegur</p>
+          <p>Skólavörðuholt?</p>
+          <p>Hafnafjörður</p>
+        </div>
+        <div class="grid grid-cols-1">
+          <h1>Phone</h1>
+          <p>+3546853923</p>
+          <p>Contact Us</p>
+        </div>
+        <div class="grid grid-cols-1">
+          <h1>Names</h1>
+          <p>Park&Co</p>
+          <p>park@park.is</p>
+          <p>-VED-3F-05DU</p>
+
+        </div>
+      </footer>
     </body>
   );
 }
