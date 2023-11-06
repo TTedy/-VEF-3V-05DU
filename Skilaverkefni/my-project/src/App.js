@@ -8,7 +8,7 @@ function App() {
       <nav class="bg-primary p-3">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <a href="#" class="flex items-center">
-            <img src="../img/parkl.png" alt="park"/>
+            <img src="my-project\src\img\parkl.png" alt="park"/>
           </a>
           <div class="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
@@ -29,7 +29,7 @@ function App() {
         </div>
       </nav>
       <main>
-        <img src="Skilaverkefni\my-project\src\img\parking-lot-facebook 1.png"></img>
+        <img src="my-project\src\img\parking-lot-facebook 1.png"></img>
       </main>
       <footer class="bg-primary grid grid-cols-3 p-3 justify-center items-center">
         <div class="grid grid-cols-1">
