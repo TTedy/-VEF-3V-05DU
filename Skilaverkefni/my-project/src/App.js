@@ -29,7 +29,7 @@ function App() {
         </div>
       </nav>
       <main>
-        <img src="my-project\src\img\parking-lot-facebook 1.png"></img>
+        <img src={process.env.PUBLIC_URL + '/img/parklot.png'} alt="Park Lot" />
       </main>
       <footer class="bg-primary grid grid-cols-3 p-3 justify-center items-center">
         <div class="grid grid-cols-1">
