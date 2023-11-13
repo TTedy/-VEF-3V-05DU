@@ -37,7 +37,7 @@ function App() {
           Front and behind of Tækniskólinn
           <p>Háteigsvegur</p>
           <p>Skólavörðuholt?</p>
-          <p>Hafnafjörður</p>
+          <p>Hafnafjörður hallo git prufa.</p>
         </div>
         <div class="grid grid-cols-1">
           <h1>Phone</h1>
