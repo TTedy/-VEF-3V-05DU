@@ -33,7 +33,7 @@ function App() {
       </main>
       <footer class="bg-primary grid grid-cols-3 p-3 justify-center items-center">
         <div class="grid grid-cols-1">
-          <h1>Tækniskólinn parking lot</h1>
+          <h1>Tækniskólinn parking lotk</h1>
           Front and behind of Tækniskólinn
           <p>Háteigsvegur</p>
           <p>Skólavörðuholt?</p>
