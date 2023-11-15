@@ -48,7 +48,6 @@ function App() {
           <h1>Names</h1>
           <p>Park&Co</p>
           <p>park@park.is</p>
-          <p>-VED-3F-05DU</p>
 
         </div>
       </footer>
