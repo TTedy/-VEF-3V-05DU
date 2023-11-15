@@ -1,7 +1,23 @@
-import logo from './logo.svg'
-import './App.css'
+import React, { useEffect, useState } from 'react';
+import './App.css';
 
 function App() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    // Remove event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     
     <body>
@@ -49,9 +65,12 @@ function App() {
           <p>Park&Co</p>
           <p>park@park.is</p>
 
-        </div>
-      </footer>
-    </body>
+
+        // Content for larger screens
+        <h1>This is a desktop view</h1>
+      
+      )}
+    </div>
   );
 }
 
