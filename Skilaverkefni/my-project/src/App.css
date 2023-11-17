@@ -72,9 +72,3 @@
   text-decoration: none; /* Optional: Remove underline from anchor */
 }
 
-/* Styles for desktop view */
-.desktop-view {
-  height: 80vh;
-  width: 80%;
-  margin: auto;
-}

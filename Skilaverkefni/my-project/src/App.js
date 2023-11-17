@@ -1,13 +1,12 @@
-// App.js
-
 import React, { useEffect, useState } from 'react';
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css'; // Import Leaflet CSS
 import './App.css';
-import './login.js'
+import parkstadi from './parkstadi.json'; // Import JSON file directly
 
 function App() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [geojsonData, setGeojsonData] = useState(null);
 
   const handleResize = () => {
     setIsMobile(window.innerWidth <= 768);
@@ -21,6 +20,26 @@ function App() {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
+  }, []);
+
+  useEffect(() => {
+    // Set GeoJSON data from the imported file
+    setGeojsonData(parkstadi);
+  }, []);
+
+  useEffect(() => {
+    // Fetch GeoJSON data from the file
+    const fetchGeoJSON = async () => {
+      try {
+        const response = await fetch('./parkstadi.json');
+        const data = await response.json();
+        setGeojsonData(data);
+      } catch (error) {
+        console.error('Error fetching GeoJSON data:', error);
+      }
+    };
+
+    fetchGeoJSON();
   }, []);
 
   return (
@@ -41,6 +60,9 @@ function App() {
                 attribution='© OpenStreetMap contributors'
               />
 
+              {/* Render GeoJSON data */}
+              {geojsonData && <GeoJSON data={geojsonData} />}
+
               <div>
                 {[1].map((item, index) => (
                   <div
@@ -57,14 +79,14 @@ function App() {
                 ))}
               </div>
 
-            <div className="mapMainButtonContainer">
-              <div className="mapMainButton">
-                <a className="buttonLink" href="#">
-                  Select
-                </a>
+              <div className="mapMainButtonContainer">
+                <div className="mapMainButton">
+                  <a className="buttonLink" href="#">
+                    Select
+                  </a>
+                </div>
               </div>
-            </div>
-            
+
             </MapContainer>
           </div>
         </>
