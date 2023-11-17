@@ -5,8 +5,6 @@ import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css'; // Import Leaflet CSS
 import './App.css';
 
-// ... (previous imports)
-
 function App() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
@@ -43,7 +41,7 @@ function App() {
               />
 
               <div>
-                {[1, 2, 3].map((item, index) => (
+                {[1].map((item, index) => (
                   <div
                     key={item}
                     className="mapButton"
@@ -59,15 +57,13 @@ function App() {
               </div>
 
               <div className="mapMainButtonContainer">
-                <div className="mapMainButton">
-                  <a
-                    className="buttonLink"
-                    href="#"
-                  >
-                    Select
-                  </a>
-                </div>
+              <div className="mapMainButton">
+                <a className="buttonLink" href="#">
+                  Select
+                </a>
               </div>
+            </div>
+            
             </MapContainer>
           </div>
         </>
