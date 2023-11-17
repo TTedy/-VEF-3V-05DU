@@ -55,7 +55,6 @@ function App() {
                   </div>
                 ))}
               </div>
-
               <div className="mapMainButtonContainer">
               <div className="mapMainButton">
                 <a className="buttonLink" href="#">
