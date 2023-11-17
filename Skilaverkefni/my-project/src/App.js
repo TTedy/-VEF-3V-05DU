@@ -1,3 +1,5 @@
+// App.js
+
 import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css'; // Import Leaflet CSS
@@ -22,53 +24,17 @@ function App() {
     };
   }, []);
 
-
-  const mainButtonStyleContainer = {
-    position: 'absolute',
-    width: '100%',
-    bottom: '20px',
-    display: 'flex',
-    justifyContent: 'center',
-  };
-  const buttonStyle = {
-    width: '50px',
-    height: '50px',
-    backgroundColor: 'blue', // Replace with your desired color or use the 'primary' class
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: '50%',
-    position: 'absolute',
-    left: '45%',
-    zIndex: 1000,
-  };
-
-  const mainButtonStyle = {
-    width: '100px', // Adjust the width as needed
-    height: '40px', // Adjust the height as needed
-    backgroundColor: 'green', // Replace with your desired color
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: '5px', // Adjust the border radius as needed
-    position: 'absolute',
-    bottom: '10px',
-    left: '50%',
-    transform: 'translateX(-50%)', // Center the button horizontally
-    zIndex: 1000,
-  };
-
   return (
     <div>
       {isMobile ? (
         // Content for mobile
         <>
           <h1>This is a mobile view</h1>
-          <div style={{ height: '100vh', width: '100%', position: 'relative' }}>
+          <div className="mobile-view">
             <MapContainer
               center={[64.09, -21.8652]} // Centered on Reykjavik
               zoom={12}
-              style={{ height: '100%', width: '100%', position: 'absolute' }}
+              className="mapContainer"
               dragging={true} // Allow dragging
             >
               <TileLayer
@@ -80,50 +46,34 @@ function App() {
                 {[1, 2, 3].map((item, index) => (
                   <div
                     key={item}
+                    className="mapButton"
                     style={{
-                      ...buttonStyle,
                       top: `${10 + index * 60}px`, // Adjust the vertical position
                     }}
                   >
-                    <a
-                      style={{
-                        color: 'white',
-                        textAlign: 'center',
-                        lineHeight: '50px',
-                        textDecoration: 'none', // Optional: Remove underline from anchor
-                      }}
-                      href="#"
-                    >
-                      Click me!
+                    <a className="buttonLink" href="#">
+                      <img className='' src='/menuicon.svg' alt="Menu Icon" />
                     </a>
                   </div>
                 ))}
               </div>
 
-            <div style={mainButtonStyleContainer}>
-              <div style={mainButtonStyle}>
-                <a
-                  style={{
-                    color: 'white',
-                    textAlign: 'center',
-                    textDecoration: 'none', // Optional: Remove underline from anchor
-                  }}
-                  href="#"
-                >
-                  Select
-                </a>
+              <div className="mapMainButtonContainer">
+                <div className="mapMainButton">
+                  <a
+                    className="buttonLink"
+                    href="#"
+                  >
+                    Select
+                  </a>
+                </div>
               </div>
-            </div>
-
-
-
-
             </MapContainer>
           </div>
         </>
       ) : (
         // Content for larger screens
-        <div style={{ height: '80vh', width: '80%', margin: 'auto' }}>
+        <div className="desktop-view">
           <h1>This is a desktop view</h1>
         </div>
       )}
