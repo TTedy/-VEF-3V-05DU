@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css'; // Import Leaflet CSS
 import './App.css';
-import './Main.js'
+import './login.js'
 
 function App() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -57,7 +57,7 @@ function App() {
                 ))}
               </div>
 
-              <div className="mapMainButtonContainer">
+            <div className="mapMainButtonContainer">
               <div className="mapMainButton">
                 <a className="buttonLink" href="#">
                   Select
