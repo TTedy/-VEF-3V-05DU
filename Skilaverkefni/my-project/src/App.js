@@ -31,15 +31,23 @@ function App() {
     // Fetch GeoJSON data from the file
     const fetchGeoJSON = async () => {
       try {
-        const response = await fetch('./parkstadi.json');
+        // const response = await fetch('./parkstadi.json');
+        const response = await fetch("parkstadi.json");
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
         const data = await response.json();
         setGeojsonData(data);
+        console.log('GeoJSON data loaded:', data);
       } catch (error) {
         console.error('Error fetching GeoJSON data:', error);
       }
     };
 
     fetchGeoJSON();
+
   }, []);
 
   return (
