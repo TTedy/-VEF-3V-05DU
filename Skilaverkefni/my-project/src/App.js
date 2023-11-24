@@ -62,7 +62,7 @@ function App() {
 
               {/* Render GeoJSON data */}
               {geojsonData && <GeoJSON data={geojsonData} />}
-
+            
               <div>
                 {[1].map((item, index) => (
                   <div
@@ -79,21 +79,64 @@ function App() {
                 ))}
               </div>
 
-              <div className="mapMainButtonContainer">
-                <div className="mapMainButton">
-                  <a className="buttonLink" href="#">
-                    Select
-                  </a>
-                </div>
+              
+
+              <div class="pin1"></div>
+              <div class="button">
+                <a href="#">PARK</a>
               </div>
+            
+
 
             </MapContainer>
           </div>
         </>
       ) : (
-        // Content for larger screens
+        // Content for larger screens (Desktop view)
         <div className="desktop-view">
           <h1>This is a desktop view</h1>
+          <MapContainer
+              center={[64.09, -21.8652]} // Centered on Reykjavik
+              zoom={12}
+              className="mapContainer"
+              dragging={true} // Allow dragging
+            >
+              <TileLayer
+                url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='© OpenStreetMap contributors'
+              />
+
+              {/* Render GeoJSON data */}
+              {geojsonData && <GeoJSON data={geojsonData} />}
+            
+              <div>
+                {[1].map((item, index) => (
+                  <div
+                    key={item}
+                    className="mapButton"
+                    style={{
+                      top: `${10 + index * 60}px`, // Adjust the vertical position
+                    }}
+                  >
+                    <a className="buttonLink" href="#">
+                      <img className='' src='/menuicon.svg' alt="Menu Icon" />
+                    </a>
+                  </div>
+                ))}
+              </div>
+
+              
+
+              
+              <div class="pin1"></div>
+              
+              <div class="button">
+                <a href="#">PARK</a>
+              </div>
+  
+
+
+            </MapContainer>
         </div>
       )}
     </div>
