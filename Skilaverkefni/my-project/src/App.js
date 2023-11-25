@@ -70,7 +70,7 @@ function App() {
 
               {/* Render GeoJSON data */}
               {geojsonData && <GeoJSON data={geojsonData} />}
-            
+              
               <div>
                 {[1].map((item, index) => (
                   <div
@@ -86,7 +86,7 @@ function App() {
                   </div>
                 ))}
               </div>
-
+              
               
 
               <div class="pin1"></div>
