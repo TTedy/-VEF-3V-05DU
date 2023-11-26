@@ -28,5 +28,20 @@ við lærðum um double dimond theroy með því að velja mjög venjulega upp s
 
 
 
+# status report 26.11.2023
+
+1: hvar er verkefnið statt núna?,
+
+við vorum að klára ui fyri síman takki map pointer er komið vantar virkni fyrir takkan og login. eftir það þurfum við að gera desktop ui siðuna.
+
+2: hver er áætlun um framvindu verkefnis út spönnina?
+
+það væri þá á 27.11.2023 að klára virkni takkans þar sem hann byrtir valmynd glugga ef hann hefur verið smeltur. vonandi væri þá komið í lag geopunktar á mapinu þanning virkni takkans mun geta valið meira en einan stað.
+það væri lika gott að gera sent gögn með takanum á gagnagrunn okkar með takkanum.
+
+3: hverju er liklegt að hægt sé að skila þann 13.12.2023
+
+það væri óliklegt þar sem við þurfum mikið eftir að gera. munun þurfa að skera niður meira verkefnið og spita smá í lofana til þess að skila á þessum tima. 
+
 
 
