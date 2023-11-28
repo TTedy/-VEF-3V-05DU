@@ -7,9 +7,19 @@ import parkstadi from './parkstadi.json'; // Import JSON file directly
 function App() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [geojsonData, setGeojsonData] = useState(null);
+  const [showDiv, setShowDiv] = useState(false);
+
+  const toggleShowDiv = () => {
+    setShowDiv(true);
+  };
 
   const handleResize = () => {
     setIsMobile(window.innerWidth <= 768);
+  };
+
+  const comfirmchoice = () => {
+
+    setShowDiv(false);
   };
 
   useEffect(() => {
@@ -46,6 +56,8 @@ function App() {
       }
     };
 
+
+
     fetchGeoJSON();
 
   }, []);
@@ -70,22 +82,6 @@ function App() {
 
               {/* Render GeoJSON data */}
               {geojsonData && <GeoJSON data={geojsonData} />}
-              
-              <div>
-                {[1].map((item, index) => (
-                  <div
-                    key={item}
-                    className="mapButton"
-                    style={{
-                      top: `${10 + index * 60}px`, // Adjust the vertical position
-                    }}
-                  >
-                    <a className="buttonLink" href="#">
-                      <img className='' src='/menuicon.svg' alt="Menu Icon" />
-                    </a>
-                  </div>
-                ))}
-              </div>
               
               
 
@@ -116,31 +112,34 @@ function App() {
 
               {/* Render GeoJSON data */}
               {geojsonData && <GeoJSON data={geojsonData} />}
-            
-              <div>
-                {[1].map((item, index) => (
-                  <div
-                    key={item}
-                    className="mapButton"
-                    style={{
-                      top: `${10 + index * 60}px`, // Adjust the vertical position
-                    }}
-                  >
-                    <a className="buttonLink" href="#">
-                      <img className='' src='/menuicon.svg' alt="Menu Icon" />
-                    </a>
-                  </div>
-                ))}
-              </div>
-
-              
 
               
               <div class="pin1"></div>
-              
-              <div class="button">
-                <a href="#">PARK</a>
-              </div>
+
+              <div>
+              {showDiv ? (
+                <div className="parkmenu bg-background">
+                  <h1>viltu leggja við?</h1>
+                  <div className="" id="time">
+                    <a href="#">time</a>
+                  </div>
+                  <div className="" id="date">
+                    <a href="#">date</a>
+                  </div>
+
+                  <div className="" id="cancel" onClick={() => setShowDiv(false)}>
+                    <a href="#">cancel</a>
+                  </div>
+                  <div className="" id="comfirm" onClick={() => comfirmchoice()}>
+                    <a href="#">comfirm</a>
+                  </div>
+                </div>
+              ) : (
+                <div className="button" id="park-button" onClick={toggleShowDiv}>
+                  <a href="#">PARK</a>
+                </div>
+              )}
+            </div>
   
 
 
