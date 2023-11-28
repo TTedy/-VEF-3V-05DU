@@ -87,7 +87,7 @@ function App() {
 
               <div class="pin1"></div>
               <div class="button">
-                <a href="#">PARK</a>
+                <a href="#">PARK AT ...</a>
               </div>
             
 
