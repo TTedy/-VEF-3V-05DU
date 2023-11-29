@@ -22,6 +22,7 @@ function App() {
     setShowDiv(false);
   };
 
+  
   useEffect(() => {
     // Add event listener for window resize
     window.addEventListener('resize', handleResize);
@@ -114,11 +115,11 @@ function App() {
               {geojsonData && <GeoJSON data={geojsonData} />}
 
               
-              <div class="pin1"></div>
+              {showDiv ? null : <div className="pin1"></div>}
 
               <div>
               {showDiv ? (
-                <div className="parkmenu bg-background">
+                <div className="parkmenu container">
                   <h1>viltu leggja við?</h1>
                   <div className="" id="time">
                     <a href="#">time</a>
