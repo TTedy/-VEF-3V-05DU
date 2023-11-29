@@ -5,11 +5,7 @@
         "type": "Feature",
         "properties": {
           "parkarea_id": "T2",
-          "name": "Hádegisvegur",
-          "uid": "hMrKrE5sOtTroOEXRLmBJALc2XG3",
-          "time_start": "10:00",
-          "time_end": "18:00",
-          "date" : "2016-05-15"
+          "name": "Hádegisvegur"
         },
         "geometry": {
           "type": "Point",
@@ -20,11 +16,7 @@
         "type": "Feature",
         "properties": {
           "parkarea_id": "T1",
-          "name": "Guðjón Petersen",
-          "uid": "E3Dg2cB737SEpyUyWKYZZZjwmUU2",
-          "time_start": " 7:30 - 18:00",
-          "time_end": "18:00",
-          "date" : "2016-11-05"
+          "name": "skolaverðaholt"
         },
         "geometry": {
           "type": "Point",
