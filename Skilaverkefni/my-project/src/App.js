@@ -5,15 +5,15 @@ import './App.css';
 import parkstadi from './parkstadi.json'; // Import JSON file directly
 
 function App() {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const [geojsonData, setGeojsonData] = useState(null);
-  const [showDiv, setShowDiv] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // sets default size between mobile and desktop
+  const [geojsonData, setGeojsonData] = useState(null); // Define a state variable for GeoJSON data
+  const [showDiv, setShowDiv] = useState(false); // Define a state variable for the div
 
-    // Define a state variable for the pin's coordinates
-    const [pinCoords, setPinCoords] = useState([64.09, -21.8652]); // Default to Reykjavik
+  // Define a state variable for the pin's coordinates
+  const [pinCoords, setPinCoords] = useState([64.09, -21.8652]); // Default to Reykjavik
 
   const toggleShowDiv = () => {
-    setShowDiv(true);
+    setShowDiv(true); // shows the div
   };
 
   const handleResize = () => {
@@ -51,18 +51,17 @@ function App() {
     // Fetch GeoJSON data from the file
     const fetchGeoJSON = async () => {
       try {
-        // const response = await fetch('./parkstadi.json');
         const response = await fetch("parkstadi.json");
         
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-
+  
         const data = await response.json();
         setGeojsonData(data);
         console.log('GeoJSON data loaded:', data);
       } catch (error) {
-        console.error('Error fetching GeoJSON data:', error);
+          console.log('Error fetching GeoJSON data:', error);
       }
     };
 
@@ -131,11 +130,7 @@ function App() {
 
               
               {/* Replace the div with className "pin1" with a Marker component */}
-              <Marker position={pinCoords} draggable={true} onDragend={handleMarkerDrag}>
-                <Popup>
-                  <div className="pin1"></div>
-                </Popup>
-              </Marker>
+              <div className="pin1"></div>
 
               <div>
               {showDiv ? (
