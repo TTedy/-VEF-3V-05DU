@@ -94,10 +94,32 @@ function App() {
               
               
 
-              <div class="pin1"></div>
-              <div class="button">
-                <a href="#">PARK AT ...</a>
-              </div>
+              {showDiv ? null : <div className="pin1"></div>}
+
+              <div>
+              {showDiv ? (
+                <div className="parkmenu container">
+                  <div className="" id="time">
+                    <a href="#">time</a>
+                  </div>
+                  <div className="" id="date">
+                    <a href="#">date</a>
+                  </div>
+
+                  <div className="" id="cancel" onClick={() => setShowDiv(false)}>
+                    <a href="#">cancel</a>
+                  </div>
+                  <div className="" id="comfirm" onClick={() => comfirmchoice()}>
+                    <a href="#">comfirm</a>
+                  </div>
+                </div>
+              ) : (
+                <div className="button" id="park-button" onClick={toggleShowDiv}>
+                  <a href="#">PARK</a>
+                </div>
+              )}
+            </div>
+  
             
 
 
