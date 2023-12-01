@@ -129,7 +129,7 @@ html, body {
   left: 50%;
   transform: translateX(-50%);
   background-color: #fff;
-  padding: 20px;
+  padding: 10px;
   border: 1px solid #ccc;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
