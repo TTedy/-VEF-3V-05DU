@@ -117,7 +117,6 @@ function App() {
             <div>
               {showDiv ? (
                 <div className="parkmenu container">
-                  <h1>viltu leggja við?</h1>
                   <div className="" id="time"><a href="#">time</a></div>
                   <div className="" id="date"><a href="#">date</a></div>
                   <div className="" id="cancel" onClick={() => setShowDiv(false)}><a href="#">cancel</a></div>
