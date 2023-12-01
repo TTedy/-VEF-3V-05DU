@@ -45,6 +45,25 @@ html, body {
   transform: translateX(-50%);
   bottom: 10px;
   z-index: 1001;
+<<<<<<< HEAD
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 100px; 
+  border-radius: 100px;
+  text-align: center;
+  line-height: 100px; /* Should be equal to the height for vertical centering 
+  background-color: rgba(255, 255, 255, 0.674);
+  mix-blend-mode: difference;
+}*/
+
+.button a {
+  color: rgb(0, 0, 0);
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 28px;
+=======
 }
 
 /*mikilvægt*/
@@ -66,6 +85,7 @@ html, body {
   line-height: 50px;
   text-decoration: none;
   z-index:1001;
+>>>>>>> 276f610a7b05080da8eeb270500776dbac78154b
 }
 /*
 .button a {
