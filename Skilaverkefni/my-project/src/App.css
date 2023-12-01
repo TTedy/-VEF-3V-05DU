@@ -32,53 +32,20 @@ html, body {
   box-shadow: 0 2px 5px #000;
 }
 
-.button, .parkmenu {
+.mapMainButton {
+  width: 100px;
+  height: 40px;
+  background-color: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
   position: absolute;
-  z-index: 1001;
   left: 50%;
   transform: translateX(-50%);
-  width: 200px;
-  border-radius: 50px; /* Adjusted for a cleaner look */
-  text-align: center;
-  font-family: Helvetica, sans-serif;
-  font-weight: bold;
-  font-size: 28px;
-  text-decoration: none;
-  transition: transform 0.3s ease, opacity 0.3s ease; /* Transition property for transform and opacity */
-}
-
-.button {
-  bottom: 20px;
-  height: 100px;
-  line-height: 100px;
-  background-color: rgba(134, 134, 134, 0.8); /* Adjusted transparency */
-  cursor: pointer;
-}
-
-.parkmenu {
-  top: -200px; /* Initially off-screen */
-  height: 200px;
-  background-color: rgba(134, 134, 134, 0.8);
-  cursor: pointer;
-}
-
-.button a, .parkmenu a {
-  color: rgb(255, 255, 255);
-  display: block;
-}
-
-/* On hover effect */
-.button:hover {
-  background-color: rgba(134, 134, 134, 1);
-}
-
-
-
-
-/*
-.button {
-  position: absolute;
+  bottom: 10px;
   z-index: 1001;
+<<<<<<< HEAD
   top: 85%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -96,6 +63,29 @@ html, body {
   font-family: Helvetica, sans-serif;
   font-weight: bold;
   font-size: 28px;
+=======
+}
+
+/*mikilvægt*/
+.mobile-view {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+}
+/*mikilvægt*/
+.mapContainer {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.buttonLink {
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  text-decoration: none;
+  z-index:1001;
+>>>>>>> 276f610a7b05080da8eeb270500776dbac78154b
 }
 /*
 .button a {
@@ -136,62 +126,38 @@ html, body {
 }
 */
 /*mikilvægt*/
-.mapMainButton {
-  width: 100px;
-  height: 40px;
-  background-color: green;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
+.button {
   position: absolute;
+  bottom: 4em;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 10px;
-  z-index: 1001;
-}
-/*mikilvægt*/
-.mobile-view {
-  height: 100vh;
-  width: 100%;
-  position: relative;
-}
-/*mikilvægt*/
-.mapContainer {
-  height: 100%;
-  width: 100%;
-  position: absolute;
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 15px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  z-index: 1000; /* Set a z-index lower than the parkmenu */
 }
 
-.buttonLink {
-  color: white;
-  text-align: center;
-  line-height: 50px;
-  text-decoration: none;
-  z-index:1001;
+.button:hover {
+  background-color: #45a049;
 }
-
-
 
 .parkmenu {
   position: absolute;
-  top: 50%;
+  bottom: 4em;
   left: 50%;
-  width: 50%;
-  z-index: 1005;
-  transform: translate(-50%, -50%);
-  background-color: rgba(255, 255, 255, 0.674);
+  transform: translateX(-50%);
+  background-color: #fff;
   padding: 20px;
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.15);
+  border: 1px solid #ccc;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1001; /* Set a higher z-index than the button */
 }
 
 .parkmenu h1 {
-  text-align: center;
   margin-bottom: 20px;
-}
-
-.parkmenu div {
-  margin-bottom: 10px;
 }
 
 .parkmenu a {
@@ -199,3 +165,18 @@ html, body {
   color: #333;
 }
 
+.show-menu {
+  display: block;
+  animation: fadeIn 0.01s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
