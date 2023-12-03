@@ -9,6 +9,9 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent scrolling when menu is open */
 }
 
 .mainButtonStyleContainer {
@@ -45,25 +48,6 @@ html, body {
   transform: translateX(-50%);
   bottom: 10px;
   z-index: 1001;
-<<<<<<< HEAD
-  top: 85%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 200px;
-  height: 100px; 
-  border-radius: 100px;
-  text-align: center;
-  line-height: 100px; /* Should be equal to the height for vertical centering 
-  background-color: rgba(255, 255, 255, 0.674);
-  mix-blend-mode: difference;
-}*/
-
-.button a {
-  color: rgb(0, 0, 0);
-  font-family: Helvetica, sans-serif;
-  font-weight: bold;
-  font-size: 28px;
-=======
 }
 
 /*mikilvægt*/
@@ -85,53 +69,17 @@ html, body {
   line-height: 50px;
   text-decoration: none;
   z-index:1001;
->>>>>>> 276f610a7b05080da8eeb270500776dbac78154b
-}
-/*
-.button a {
-  color: white;
-  font-family: Helvetica, sans-serif;
-  font-weight: bold;
-  font-size: 28px;
-  text-align: center;
-  text-decoration: none;
-  background-color: #ffa12b;
-  display: block;
-  padding: 10px 40px;
-  border-radius: 5px;
-  text-shadow: 0px 1px 0px #000;
-  filter: drop-shadow(0px 1px 0px #000);
-  box-shadow: inset 0 1px 0 #ffe5c4, 0 10px 0 #915100;
-  border-radius: 5px;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-/*
-.button a:active {
-  top: 10px;
-  background-color: #f78900;
-  box-shadow: inset 0 1px 0 #ffe5c4, inset 0 -3px 0 #915100;
 }
 
-.button:after {
-  content: "";
-  height: 100%;
-  width: 100%;
-  padding: 4px;
-  position: absolute;
-  bottom: -15px;
-  left: -4px;
-  z-index: -1;
-  background-color: #2b1800;
-  border-radius: 5px;
-}
-*/
-/*mikilvægt*/
+/* Add the following styles to your App.css file */
+
+
 .button {
   position: absolute;
   bottom: 4em;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #4CAF50;
+  background-color: #8a8a8a;
   color: #fff;
   padding: 15px 20px;
   cursor: pointer;
@@ -139,19 +87,18 @@ html, body {
   z-index: 1000; /* Set a z-index lower than the parkmenu */
 }
 
-.button:hover {
-  background-color: #45a049;
-}
+/* ... Your existing styles ... */
+
 
 .parkmenu {
+  display: none;
   position: absolute;
-  bottom: 4em;
+  bottom: 0; /* Set to 0 to initially position it at the bottom of the screen */
   left: 50%;
   transform: translateX(-50%);
   background-color: #fff;
-  padding: 10px;
+  padding: 20px;
   border: 1px solid #ccc;
-  text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1001; /* Set a higher z-index than the button */
 }
@@ -167,16 +114,16 @@ html, body {
 
 .show-menu {
   display: block;
-  animation: fadeIn 0.01s ease;
+  animation: slideInFromBottom 0.5s ease;
 }
 
-@keyframes fadeIn {
+@keyframes slideInFromBottom {
   from {
+    transform: translateY(100%);
     opacity: 0;
-    transform: translateY(10px);
   }
   to {
-    opacity: 1;
     transform: translateY(0);
+    opacity: 1;
   }
 }
