@@ -72,7 +72,7 @@ html, body {
 }
 
 /* Add the following styles to your App.css file */
-
+/* ... Your existing styles ... */
 
 .button {
   position: absolute;
@@ -82,23 +82,29 @@ html, body {
   background-color: #8a8a8a;
   color: #fff;
   padding: 15px 20px;
+  border: 1px solid #000000;
   cursor: pointer;
   transition: background-color 0.3s ease;
   z-index: 1000; /* Set a z-index lower than the parkmenu */
+  border-radius: 10px;
 }
 
-/* ... Your existing styles ... */
-
+.button a{
+  color:white;
+  text-align: center;
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 28px;
+}
 
 .parkmenu {
-  display: none;
   position: absolute;
-  bottom: 0; /* Set to 0 to initially position it at the bottom of the screen */
+  bottom: 4em; 
   left: 50%;
   transform: translateX(-50%);
-  background-color: #fff;
+  background-color: #8a8a8a;
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid #000000;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1001; /* Set a higher z-index than the button */
 }
@@ -110,20 +116,4 @@ html, body {
 .parkmenu a {
   text-decoration: none;
   color: #333;
-}
-
-.show-menu {
-  display: block;
-  animation: slideInFromBottom 0.5s ease;
-}
-
-@keyframes slideInFromBottom {
-  from {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
 }
