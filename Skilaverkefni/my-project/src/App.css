@@ -3,7 +3,6 @@ html, body {
   margin: 0;
 }
 
-
 .body {
   background-color: #ffcc8e;
   display: flex;
@@ -51,12 +50,13 @@ html, body {
 }
 
 /*mikilvægt*/
+
 .mobile-view {
   height: 100vh;
   width: 100%;
   position: relative;
 }
-/*mikilvægt*/
+
 .mapContainer {
   height: 100%;
   width: 100%;
@@ -76,31 +76,26 @@ html, body {
 
 .button {
   position: absolute;
+  text-align: center;
   bottom: 4em;
   left: 50%;
+  width:250px;
+  height:auto;
   transform: translateX(-50%);
   background-color: #8a8a8a;
   color: #fff;
   padding: 15px 20px;
   border: 1px solid #000000;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
   z-index: 1000; /* Set a z-index lower than the parkmenu */
-  border-radius: 10px;
-}
 
-.button a{
-  color:white;
-  text-align: center;
-  font-family: Helvetica, sans-serif;
-  font-weight: bold;
-  font-size: 28px;
 }
-
 .parkmenu {
   position: absolute;
+  text-align: center;
   bottom: 4em; 
   left: 50%;
+  width:250px;
+  height:auto;
   transform: translateX(-50%);
   background-color: #8a8a8a;
   padding: 20px;
@@ -108,12 +103,12 @@ html, body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1001; /* Set a higher z-index than the button */
 }
-
-.parkmenu h1 {
-  margin-bottom: 20px;
-}
-
-.parkmenu a {
+.button a,.parkmenu a{
+  color:white;
+  text-align: center;
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 28px;
   text-decoration: none;
-  color: #333;
+  text-align: center;
 }

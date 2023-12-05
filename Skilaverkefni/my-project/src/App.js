@@ -13,6 +13,7 @@ function App() {
   const handleResize = () => setIsMobile(window.innerWidth <= 768);
   const [geojsonData, setGeojsonData] = useState(null);
   const [showDiv, setShowDiv] = useState(false);
+  const [confirmed, setConfirmed] = useState(false);
 
   const [pinCoords, setPinCoords] = useState({ lat: 64.09, lng: -21.8652 });
 
@@ -94,21 +95,6 @@ function App() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   return (
     <div>
       {isMobile ? (
@@ -139,7 +125,6 @@ function App() {
               <div>
                 {showDiv ? (
                   <div className="parkmenu container">
-                    <h1>viltu leggja við?</h1>
                     <div className="" id="time"><a href="#">time</a></div>
                     <div className="" id="date"><a href="#">date</a></div>
                     <div className="" id="cancel" onClick={() => setShowDiv(false)}><a href="#">cancel</a></div>
@@ -188,21 +173,23 @@ function App() {
             <div>
               {showDiv ? (
                 <div className="parkmenu container">
-                  <h1>viltu leggja við?</h1>
-                  <div className="" id="time"><a href="#">time</a></div>
-                  <div className="" id="date"><a href="#">date</a></div>
-                  <div className="" id="cancel" onClick={() => setShowDiv(false)}><a href="#">cancel</a></div>
-                  <div className="" id="confirm" onClick={confirmChoice}><a href="#">confirm</a></div>
+                  <div className="" id="time"><a href="#">TIME</a></div>
+                  <div className="" id="date"><a href="#">DATE</a></div>
+                  <div className="" id="cancel" onClick={() => setShowDiv(false)}><a href="#">CANCEL</a></div>
+                  <div className="" id="confirm" onClick={confirmChoice}><a href="#">CONFIRM</a></div>
+                  {confirmed && <div className="check-mark">✓</div>}
                 </div>
               ) : (
                 <div className="button" id="park-button" onClick={toggleShowDiv}><a href="#">PARK</a></div>
               )}
             </div>
+
+
+            
           </MapContainer>
         </div>
       )}
     </div>
-  
   
   
   
