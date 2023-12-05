@@ -4,38 +4,55 @@ import 'leaflet/dist/leaflet.css';
 import './App.css';
 import parkstadi from './parkstadi.json';
 
+
+
+
+
 function App() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const handleResize = () => setIsMobile(window.innerWidth <= 768);
   const [geojsonData, setGeojsonData] = useState(null);
   const [showDiv, setShowDiv] = useState(false);
+
   const [pinCoords, setPinCoords] = useState({ lat: 64.09, lng: -21.8652 });
 
   const toggleShowDiv = () => setShowDiv(!showDiv);
+  const confirmChoice = () => {
+    // You can use pinCoords here
+    console.log(pinCoords);
+    setShowDiv(false);
+  };
+  
+  
+
 
   const handleMarkerDrag = (event) => {
+    // i need the data for the marker position
+    // so i need the setpincoords
     if (event.target && event.target.getLatLng) {
-      setPinCoords(event.target.getLatLng());
+      console.log('Marker Position:', event.target.getLatLng());
     }
   };
 
-  const handleMapMove = (e) => {
-    if (e.target && e.target.getCenter) {
-      const center = e.target.getCenter();
-      setPinCoords({ lat: center.lat, lng: center.lng });
-    }
-  };
 
-  const handleResize = () => setIsMobile(window.innerWidth <= 768);
 
-  const confirmChoice = () => setShowDiv(false);
 
+
+ /*
   useEffect(() => {
     const logMarkerPosition = setInterval(() => {
-      console.log('Marker Position:', pinCoords);
+      console.log('Marker Position:', setPinCoords);
     }, 1000);
 
     return () => clearInterval(logMarkerPosition);
-  }, [pinCoords]);
+  }, [setPinCoords]);
+  
+  */
+
+
+
+
+
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
@@ -45,6 +62,12 @@ function App() {
   useEffect(() => {
     setGeojsonData(parkstadi);
   }, []);
+
+
+
+
+
+
 
   useEffect(() => {
     const fetchGeoJSON = async () => {
@@ -66,6 +89,26 @@ function App() {
     fetchGeoJSON();
   }, []);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <div>
       {isMobile ? (
@@ -77,7 +120,6 @@ function App() {
               zoom={12}
               markerPosition={pinCoords}
               showDiv={showDiv}
-              onMapMove={handleMapMove}
               onMarkerDrag={handleMarkerDrag}
               onToggleShowDiv={toggleShowDiv}
               onConfirmChoice={confirmChoice}
@@ -110,7 +152,15 @@ function App() {
             </MapContainer>
           </div>
         </>
-      ) : (
+      ) 
+      
+      
+      
+      : 
+      
+      
+      
+      (
         <div className="desktop-view">
           <h1>This is a desktop view</h1>
           <MapContainer
@@ -118,12 +168,9 @@ function App() {
             zoom={12}
             className="mapContainer"
             dragging={true}
-            onmoveend={(e) => {
-              if (e.target && e.target.getCenter) {
-                const center = e.target.getCenter();
-                setPinCoords({ lat: center.lat, lng: center.lng });
-              }
-            }}
+            onMarkerDrag={handleMarkerDrag}
+            markerPosition={pinCoords}
+            onToggleShowDiv={toggleShowDiv}
           >
             <TileLayer
               url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -131,6 +178,8 @@ function App() {
             />
 
             {geojsonData && <GeoJSON data={geojsonData} />}
+
+            map.setview(new L.LatLng(40.737, -73.923));
 
             <Marker position={pinCoords} draggable={true} onDrag={handleMarkerDrag}>
               <Popup>A popup!</Popup>
@@ -153,6 +202,11 @@ function App() {
         </div>
       )}
     </div>
+  
+  
+  
+  
+  
   );
 }
 
