@@ -13,6 +13,7 @@ function App() {
   const handleResize = () => setIsMobile(window.innerWidth <= 768);
   const [geojsonData, setGeojsonData] = useState(null);
   const [showDiv, setShowDiv] = useState(false);
+  const [confirmed, setConfirmed] = useState(false);
 
   const [pinCoords, setPinCoords] = useState({ lat: 64.09, lng: -21.8652 });
 
@@ -63,21 +64,6 @@ function App() {
 
     fetchGeoJSON();
   }, []);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
