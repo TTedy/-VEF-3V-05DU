@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import parkstadi from './parkstadi.json';
+
 
 
 
@@ -13,14 +14,31 @@ function App() {
   const handleResize = () => setIsMobile(window.innerWidth <= 768);
   const [geojsonData, setGeojsonData] = useState(null);
   const [showDiv, setShowDiv] = useState(false);
-  const [confirmed, setConfirmed] = useState(false);
 
-  const [pinCoords, setPinCoords] = useState({ lat: 64.09, lng: -21.8652 });
+  const [clickedCoords, setClickedCoords] = useState(null);
+
+
+  const handleClick = (event) => {
+    console.log('Handling click:', event.latlng);
+    setClickedCoords({ lat: event.latlng.lat, lng: event.latlng.lng });
+    console.log('State after click:', clickedCoords);
+  };
+  
+  
+  /*
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      console.log('Clicked Coords:', clickedCoords);
+      // You can add any additional logic here
+    }, 1500);
+  
+    // Cleanup the interval on component unmount
+    return () => clearInterval(intervalId);
+  }, [clickedCoords]); // Include clickedCoords in the dependency array
+  */
 
   const toggleShowDiv = () => setShowDiv(!showDiv);
   const confirmChoice = () => {
-    // You can use pinCoords here
-    console.log(pinCoords);
     setShowDiv(false);
   };
 
@@ -55,10 +73,6 @@ function App() {
   }, []);
 
 
-
-
-
-
   return (
     <div>
       {isMobile ? (
@@ -73,7 +87,7 @@ function App() {
               onToggleShowDiv={toggleShowDiv}
               onConfirmChoice={confirmChoice}
               geojsonData={geojsonData}
-              id="map"
+              onClick={handleClick}
             >
               <TileLayer
                 url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -154,8 +168,7 @@ function App() {
                 center={[64.09, -21.8652]}
                 zoom={12}
                 className="mapContainer"
-                dragging={true}
-                id="map"
+                  onClick={handleClick}
               >
                 <TileLayer
                   url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
