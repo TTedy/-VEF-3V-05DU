@@ -1,14 +1,24 @@
-import { MapContainer, TileLayer, GeoJSON, Marker, popup } from 'react-leaflet';
+import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import parkstadi from './parkstadi.json';
+import { getDatabase } from "firebase/database";
+
+export const db = getDatabase(app);
+
+
 
 function App() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const handleResize = () => setIsMobile(window.innerWidth <= 768);
   const [geojsonData, setGeojsonData] = useState(null);
   const [showDiv, setShowDiv] = useState(false);
+  const myElement = document.getElementById('marker');
+  const handleMarkerClick = () => {
+    console.log('Marker pressed!');
+  };
+  
 
   const toggleShowDiv = () => setShowDiv(!showDiv);
   const confirmChoice = () => {
@@ -44,6 +54,24 @@ function App() {
     fetchGeoJSON();
   }, []);
 
+  useEffect(() => {
+    const handleMarkerClick = () => {
+      // Perform actions when the marker is pressed
+      console.log('Marker pressed!');
+      // Add your custom logic here
+    };
+
+    if (myElement) {
+      myElement.addEventListener('click', handleMarkerClick);
+    }
+
+    return () => {
+      // Cleanup the event listener when the component unmounts
+      if (myElement) {
+        myElement.removeEventListener('click', handleMarkerClick);
+      }
+    };
+  }, [myElement]);
 
   return (
     <div>
@@ -51,7 +79,7 @@ function App() {
         <>
           <h1>This is a mobile view</h1>
           <div className="mobile-view">
-
+            {/* ... (your existing mobile view JSX code) */}
             <MapContainer
               center={[64.09, -21.8652]}
               zoom={12}
@@ -59,36 +87,23 @@ function App() {
               onToggleShowDiv={toggleShowDiv}
               onConfirmChoice={confirmChoice}
               geojsonData={geojsonData}
+              style={{ height: '100vh' }}
             >
               <TileLayer
                 url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='© OpenStreetMap contributors'
               />
-              <marker>
+              {/* ... (other map components) */}
+              <Marker id="marker" onClick={handleMarkerClick}>
                 {geojsonData && <GeoJSON data={geojsonData} />}
-                <popup>
-                    popup
-                </popup>
-              </marker>
+                <Popup>
+                </Popup>
+              </Marker>
+              {/* ... (your existing MapContainer JSX code) */}
               <div>
                 {showDiv ? (
                   <div className="parkmenu container">
-                    <div className="" id="time">
-                      <a href="#">TIME</a>
-                    </div>
-                    <div className="" id="date">
-                      <a href="#">DATE</a>
-                    </div>
-                    <div
-                      className=""
-                      id="cancel"
-                      onClick={() => setShowDiv(false)}
-                    >
-                      <a href="#">CANCEL</a>
-                    </div>
-                    <div className="" id="confirm" onClick={confirmChoice}>
-                      <a href="#">CONFIRM</a>
-                    </div>
+                    {/* ... (your existing mobile view parkmenu JSX code) */}
                   </div>
                 ) : (
                   <div
@@ -106,60 +121,24 @@ function App() {
       ) : (
         <div className='container'>
           <div className="desktop-view flex flex-row" id="map">
-            <div className="">
-              {showDiv ? (
-                <div className="parkmenuDesk container">
-                  <div className="" id="time">
-                    <a href="#">TIME</a>
-                  </div>
-                  <div className="" id="date">
-                    <a href="#">DATE</a>
-                  </div>
-                  <div
-                    className=""
-                    id="cancel"
-                    onClick={() => setShowDiv(false)}
-                  >
-                    <a href="#">CANCEL</a>
-                  </div>
-                  <div className="" id="confirm" onClick={confirmChoice}>
-                    <a href="#">CONFIRM</a>
-                  </div>
-                </div>
-              ) : (
-                <div
-                  className="buttonDesk"
-                  id="park-button"
-                  onClick={toggleShowDiv}
-                >
-                  <a href="#">PARK</a>
-                </div>
-              )}
-            </div>
-              
-            <div>    
-              <MapContainer
-                center={[64.09, -21.8652]}
-                zoom={12}
-                className="mapContainer"
-              >
-                <TileLayer
-                  url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  attribution='© OpenStreetMap contributors'
-                />
-
-                {geojsonData && <GeoJSON data={geojsonData} />}
-
-
-              </MapContainer>
-            </div>
-
+            {/* ... (your existing desktop view JSX code) */}
+            <MapContainer
+              center={[64.09, -21.8652]}
+              zoom={12}
+              className="mapContainer"
+            >
+              <TileLayer
+                url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='© OpenStreetMap contributors'
+              />
+              {geojsonData && <GeoJSON data={geojsonData} />}
+            </MapContainer>
+            {/* ... (your existing desktop view JSX code) */}
           </div>
         </div>
       )}
     </div>
   );
 }
-
 
 export default App;
