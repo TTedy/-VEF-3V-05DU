@@ -1,18 +1,8 @@
-html, body {
+html {
   height: 100%;
   margin: 0;
+  background-color: #616161;
 }
-
-.body {
-  background-color: #ffcc8e;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
-  overflow: hidden; /* Prevent scrolling when menu is open */
-}
-
 .mainButtonStyleContainer {
   position: absolute;
   width: 100%;
@@ -89,6 +79,29 @@ html, body {
   z-index: 1000; /* Set a z-index lower than the parkmenu */
 
 }
+.buttonDesk {
+  text-align: center;
+  width:250px;
+  margin: 5em 0 0 12em;
+  height:auto;
+  transform: translateX(-50%);
+  background-color: #8a8a8a;
+  color: #fff;
+  padding: 15px 20px;
+  border: 1px solid #000000;
+
+}
+.parkmenuDesk {
+  text-align: center;
+  width:250px;
+  height:auto;
+  margin: 5em 0 0 12em;
+  transform: translateX(-50%);
+  background-color: #8a8a8a;
+  padding: 20px;
+  border: 1px solid #000000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 .parkmenu {
   position: absolute;
   text-align: center;
@@ -103,7 +116,15 @@ html, body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1001; /* Set a higher z-index than the button */
 }
-
+.buttonDesk a,.parkmenuDesk a{
+  color:white;
+  text-align: center;
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 28px;
+  text-decoration: none;
+  text-align: center;
+}
 .button a,.parkmenu a{
   color:white;
   text-align: center;
@@ -114,6 +135,15 @@ html, body {
   text-align: center;
 }
 
+.buttonDesk a:hover,.parkmenuDesk a:hover{
+  color:rgb(255, 0, 0);
+  text-align: center;
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 30px;
+  text-decoration: none;
+  text-align: center;
+}
 .button a:hover,.parkmenu a:hover{
   color:rgb(255, 0, 0);
   text-align: center;
