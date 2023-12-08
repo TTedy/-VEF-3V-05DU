@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
+import { MapContainer, TileLayer, GeoJSON, Marker, popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import parkstadi from './parkstadi.json';
 import firebase from 'firebase/app';
@@ -60,6 +60,11 @@ const Login = () => {
     return () => clearInterval(intervalId);
   }, [clickedCoords]); // Include clickedCoords in the dependency array
   */
+function App() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const handleResize = () => setIsMobile(window.innerWidth <= 768);
+  const [geojsonData, setGeojsonData] = useState(null);
+  const [showDiv, setShowDiv] = useState(false);
 
   const toggleShowDiv = () => setShowDiv(!showDiv);
 
@@ -77,7 +82,6 @@ const Login = () => {
   useEffect(() => {
     setGeojsonData(parkstadi);
   }, []);
-
 
   useEffect(() => {
     const fetchGeoJSON = async () => {
@@ -114,15 +118,17 @@ const Login = () => {
               onToggleShowDiv={toggleShowDiv}
               onConfirmChoice={confirmChoice}
               geojsonData={geojsonData}
-              onClick={handleClick}
             >
               <TileLayer
                 url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='© OpenStreetMap contributors'
               />
-
-              {geojsonData && <GeoJSON data={geojsonData} />}
-
+              <marker>
+                {geojsonData && <GeoJSON data={geojsonData} />}
+                <popup>
+                    popup
+                </popup>
+              </marker>
               <div>
                 {showDiv ? (
                   <div className="parkmenu container">
@@ -222,7 +228,6 @@ const Login = () => {
                 center={[64.09, -21.8652]}
                 zoom={12}
                 className="mapContainer"
-                  onClick={handleClick}
               >
                 <TileLayer
                   url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
