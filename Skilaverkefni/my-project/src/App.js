@@ -1,28 +1,52 @@
+import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import React, { useEffect, useState } from 'react';
-import './App.css';
 import parkstadi from './parkstadi.json';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase-config.js';
 
+firebase.initializeApp(firebaseConfig);
 
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-
-
-
-function App() {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const handleResize = () => setIsMobile(window.innerWidth <= 768);
-  const [geojsonData, setGeojsonData] = useState(null);
-  const [showDiv, setShowDiv] = useState(false);
-
-  const [clickedCoords, setClickedCoords] = useState(null);
-
-
-  const handleClick = (event) => {
-    console.log('Handling click:', event.latlng);
-    setClickedCoords({ lat: event.latlng.lat, lng: event.latlng.lng });
-    console.log('State after click:', clickedCoords);
+  const handleLogin = async () => {
+    try {
+      const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
+      const user = userCredential.user;
+      console.log('Logged in user:', user);
+      // You can add further logic like redirecting to a different page upon successful login
+    } catch (error) {
+      console.error('Error during login:', error.message);
+      // Handle login error, e.g., display an error message to the user
+    }
   };
+
+  const [showLogin, setShowLogin] = useState(false);
+
+  const toggleShowLogin = () => {
+    setShowLogin(!showLogin);
+  };
+
+  const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+  
+    const handleLogin = async () => {
+      try {
+        const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
+        const user = userCredential.user;
+        console.log('Logged in user:', user);
+        // You can add further logic like redirecting to a different page upon successful login
+      } catch (error) {
+        console.error('Error during login:', error.message);
+        // Handle login error, e.g., display an error message to the user
+    }
+  };
+  
+  
   
   
   /*
@@ -38,9 +62,12 @@ function App() {
   */
 
   const toggleShowDiv = () => setShowDiv(!showDiv);
+
+  
   const confirmChoice = () => {
     setShowDiv(false);
   };
+  
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
@@ -161,6 +188,33 @@ function App() {
                   <a href="#">PARK</a>
                 </div>
               )}
+              <div>
+                {showLogin ? (
+                  <div class="login-container">
+                    <h2>Login</h2>
+                  
+                    <div class="input-group">
+                      <label for="username">Username:</label>
+                      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    </div>
+                  
+                    <div class="input-group">
+                      <label for="password">Password:</label>
+                      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    </div>
+                  
+                    <button class="login-btn" onclick="handleLogin()">Login</button>
+                    <button class="cancel-btn" onClick={() => setShowLogin(false)}>Cancel</button>
+                  </div>
+                ) : (
+                  <div className="loginDesk" 
+                  id="login-button" 
+                  onClick={toggleShowLogin}
+                  >
+                    <a href="#">LOGIN</a>
+                  </div>
+                )}
+              </div>
             </div>
               
             <div>    
