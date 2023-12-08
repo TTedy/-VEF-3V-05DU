@@ -3,6 +3,21 @@ html, body {
   margin: 0;
 }
 
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:auto;
+  left: 50%;
+  right: 20%;
+  transform: translateX(-50%);
+  background-color: #8a8a8a;
+  padding: 20px;
+  border: 1px solid #000000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10002;
+}
+
 .body {
   background-color: #ffcc8e;
   display: flex;

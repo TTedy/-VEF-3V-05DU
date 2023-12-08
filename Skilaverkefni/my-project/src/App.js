@@ -1,41 +1,14 @@
-import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
+import { MapContainer, TileLayer, GeoJSON, Marker, popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import parkstadi from './parkstadi.json';
-
-
-
-
-
 
 function App() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const handleResize = () => setIsMobile(window.innerWidth <= 768);
   const [geojsonData, setGeojsonData] = useState(null);
   const [showDiv, setShowDiv] = useState(false);
-
-  const [clickedCoords, setClickedCoords] = useState(null);
-
-
-  const handleClick = (event) => {
-    console.log('Handling click:', event.latlng);
-    setClickedCoords({ lat: event.latlng.lat, lng: event.latlng.lng });
-    console.log('State after click:', clickedCoords);
-  };
-  
-  
-  /*
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      console.log('Clicked Coords:', clickedCoords);
-      // You can add any additional logic here
-    }, 1500);
-  
-    // Cleanup the interval on component unmount
-    return () => clearInterval(intervalId);
-  }, [clickedCoords]); // Include clickedCoords in the dependency array
-  */
 
   const toggleShowDiv = () => setShowDiv(!showDiv);
   const confirmChoice = () => {
@@ -50,7 +23,6 @@ function App() {
   useEffect(() => {
     setGeojsonData(parkstadi);
   }, []);
-
 
   useEffect(() => {
     const fetchGeoJSON = async () => {
@@ -86,15 +58,17 @@ function App() {
               onToggleShowDiv={toggleShowDiv}
               onConfirmChoice={confirmChoice}
               geojsonData={geojsonData}
-              onClick={handleClick}
             >
               <TileLayer
                 url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='© OpenStreetMap contributors'
               />
-
-              {geojsonData && <GeoJSON data={geojsonData} />}
-
+              <marker>
+                {geojsonData && <GeoJSON data={geojsonData} />}
+                <popup>
+                    popup
+                </popup>
+              </marker>
               <div>
                 {showDiv ? (
                   <div className="parkmenu container">
@@ -138,17 +112,22 @@ function App() {
               zoom={12}
               className="mapContainer"
               onToggleShowDiv={toggleShowDiv}
-              onClick={handleClick}
             >
               <TileLayer
                 url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='© OpenStreetMap contributors'
               />
 
-              {geojsonData && <GeoJSON data={geojsonData} />}
+              <marker id="marker">
+                {geojsonData && <GeoJSON data={geojsonData} />}
+                <popup>
+                    popup
+                </popup>
+              </marker>
 
-
-
+              <div className='login'>
+                  <a>Login</a>
+                </div>
 
               <div>
                 {showDiv ? (
