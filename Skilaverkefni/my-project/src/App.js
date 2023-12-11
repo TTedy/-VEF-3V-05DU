@@ -1,11 +1,21 @@
-// Hér er importað React og nokkrar nauðsynlegar pakkar frá react-leaflet
 import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import parkstadi from './parkstadi.json';
-import firebase from 'firebase/app';
-import firebaseConfig from './firebase-config'; // Lagaðu slóðina ef þarf
+import { initializeApp } from 'firebase/app';  // Import initializeApp
 import 'firebase/auth';
+import 'firebase/firestore';
+import db from './firebase-config';  // Make sure this import is correct
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAfdMNAyBga0KjMsJF_u_LH7ScRxf5H9pQ",
+  authDomain: "reactfirebase-40062.firebaseapp.com",
+  projectId: "reactfirebase-40062",
+  storageBucket: "reactfirebase-40062.appspot.com",
+  messagingSenderId: "66072772218",
+  appId: "1:66072772218:web:e78f07de16234fe19445c3"
+};
+
 
 // Initialize Firebase með gefnum stillingum
 firebase.initializeApp(firebaseConfig);
