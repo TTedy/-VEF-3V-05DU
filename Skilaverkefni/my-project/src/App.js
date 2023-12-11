@@ -1,61 +1,78 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import './App.css';
 import parkstadi from './parkstadi.json';
-import firebase from 'firebase/app';
-import 'firebase/auth';
 
 
-import { firebaseConfig } from './firebase-config.js';
 
-export default function App() {
+
+
+function App() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const handleResize = () => setIsMobile(window.innerWidth <= 768);
   const [geojsonData, setGeojsonData] = useState(null);
   const [showDiv, setShowDiv] = useState(false);
+  const [confirmed, setConfirmed] = useState(false);
 
-  firebase.initializeApp(firebaseConfig);
+  const [pinCoords, setPinCoords] = useState({ lat: 64.09, lng: -21.8652 });
 
-const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
-  const handleLogin = async () => {
-    try {
-      const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
-      const user = userCredential.user;
-      console.log('Logged in user:', user);
-    } catch (error) {
-      console.error('Error during login:', error.message);
-    }
-  };
 
-  const [showLogin, setShowLogin] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const toggleShowLogin = () => {
-    setShowLogin(!showLogin);
-  };
 
-  /*
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      console.log('Clicked Coords:', clickedCoords);
-      // You can add any additional logic here
-    }, 1500);
-  
-    // Cleanup the interval on component unmount
-    return () => clearInterval(intervalId);
-  }, [clickedCoords]); // Include clickedCoords in the dependency array
-  */
 
 
   const toggleShowDiv = () => setShowDiv(!showDiv);
-
-  
   const confirmChoice = () => {
+    // You can use pinCoords here
+    console.log(pinCoords);
     setShowDiv(false);
   };
   
+
+  const handleMarkerDrag = (event) => {
+    // i need the data for the marker position
+    // so i need the setpincoords
+    if (event.target && event.target.getLatLng) {
+      console.log('Marker Position:', event.target.getLatLng());
+    }
+  };
+
+  const handleLogin = () => {
+    correctLogin();
+  };
+
+  const correctLogin = () => {
+    if (email === "gammi@gmail.com" && password === "123456") {
+      console.log("Login successful");
+      setIsLoggedIn(true);
+      setShowLogin(false);
+    }
+  };
+
+  {isLoggedIn && <span className="checkmark">placeholder</span>}
+
+
+
+ /*
+  useEffect(() => {
+    const logMarkerPosition = setInterval(() => {
+      console.log('Marker Position:', setPinCoords);
+    }, 1000);
+
+    return () => clearInterval(logMarkerPosition);
+  }, [setPinCoords]);
+  
+  */
+
+
+
+
+
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
@@ -65,6 +82,16 @@ const Login = () => {
   useEffect(() => {
     setGeojsonData(parkstadi);
   }, []);
+
+
+
+  const [showLogin, setShowLogin] = useState(false);
+
+  const toggleShowLogin = () => {
+    setShowLogin(!showLogin);
+  };
+
+
 
   useEffect(() => {
     const fetchGeoJSON = async () => {
@@ -87,17 +114,22 @@ const Login = () => {
   }, []);
 
 
+
+
+
+
   return (
     <div>
       {isMobile ? (
         <>
           <h1>This is a mobile view</h1>
           <div className="mobile-view">
-
             <MapContainer
               center={[64.09, -21.8652]}
               zoom={12}
+              markerPosition={pinCoords}
               showDiv={showDiv}
+              onMarkerDrag={handleMarkerDrag}
               onToggleShowDiv={toggleShowDiv}
               onConfirmChoice={confirmChoice}
               geojsonData={geojsonData}
@@ -106,46 +138,37 @@ const Login = () => {
                 url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='© OpenStreetMap contributors'
               />
-              <marker>
-                {geojsonData && <GeoJSON data={geojsonData} />}
-                <popup>
-                    popup
-                </popup>
-              </marker>
+
+              {geojsonData && <GeoJSON data={geojsonData} />}
+
+              <Marker position={pinCoords} draggable={true} onDrag={handleMarkerDrag}>
+                <Popup>A popup!</Popup>
+              </Marker>
+
               <div>
                 {showDiv ? (
                   <div className="parkmenu container">
-                    <div className="" id="time">
-                      <a href="#">TIME</a>
-                    </div>
-                    <div className="" id="date">
-                      <a href="#">DATE</a>
-                    </div>
-                    <div
-                      className=""
-                      id="cancel"
-                      onClick={() => setShowDiv(false)}
-                    >
-                      <a href="#">CANCEL</a>
-                    </div>
-                    <div className="" id="confirm" onClick={confirmChoice}>
-                      <a href="#">CONFIRM</a>
-                    </div>
+                    <div className="" id="time"><a href="#">time</a></div>
+                    <div className="" id="date"><a href="#">date</a></div>
+                    <div className="" id="cancel" onClick={() => setShowDiv(false)}><a href="#">cancel</a></div>
+                    <div className="" id="confirm" onClick={confirmChoice}><a href="#">confirm</a></div>
                   </div>
                 ) : (
-                  <div
-                    className="button"
-                    id="park-button"
-                    onClick={toggleShowDiv}
-                  >
-                    <a href="#">PARK</a>
-                  </div>
+                  <div className="button" id="park-button" onClick={toggleShowDiv}><a href="#">PARK</a></div>
                 )}
               </div>
             </MapContainer>
           </div>
         </>
-      ) : (
+      ) 
+      
+      
+      
+      : 
+      
+      
+      
+      (
         <div className='container'>
           <div className="desktop-view flex flex-row" id="map">
             <div className="">
@@ -186,13 +209,13 @@ const Login = () => {
                       <label for="username">Username:</label>
                       <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                     </div>
-                  
+
                     <div class="input-group">
                       <label for="password">Password:</label>
                       <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     </div>
                   
-                    <button class="login-btn" onclick="handleLogin()">Login</button>
+                    <button class="login-btn" onClick={handleLogin}>Login</button>
                     <button class="cancel-btn" onClick={() => setShowLogin(false)}>Cancel</button>
                   </div>
                 ) : (
@@ -230,4 +253,5 @@ const Login = () => {
     </div>
   );
 }
-};
+
+export default App;
