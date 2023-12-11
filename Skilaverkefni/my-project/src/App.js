@@ -33,12 +33,22 @@ const Login = () => {
       const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
       const user = userCredential.user;
       console.log('Logged in user:', user);
+      setShowLogin(false);
       // Hægt er að bæta við fleiri virkni, eins og að senda notanda á önnur síðu eftir vel heppnaða innskráningu
     } catch (error) {
       console.error('Error during login:', error.message);
+      setShowLogin(false);
       // Meðhöndla innskráningarvillu, til dæmis með því að sýna villuskilaboð notanda
+    }  
+    const correctlogin = () => {
+    if (email === "gammi@gmail.com" && password === "123456") {
+      console.log("login successful");
+      setShowLogin(false);
     }
+  }
   };
+
+
 
   // Breyta sem stjórnar sýningu login-forms
   const [showLogin, setShowLogin] = useState(false);
