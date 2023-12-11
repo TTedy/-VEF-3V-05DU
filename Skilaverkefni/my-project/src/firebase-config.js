@@ -1,4 +1,4 @@
-import '../src/App.js'
+import './App.js'
 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "@firebase/firestore"

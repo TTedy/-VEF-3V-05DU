@@ -1,31 +1,39 @@
+// Hér er importað React og nokkrar nauðsynlegar pakkar frá react-leaflet
 import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import parkstadi from './parkstadi.json';
 import firebase from 'firebase/app';
-import firebaseConfig from '../public/firebase-config'; // Adjust the path if needed
+import firebaseConfig from './firebase-config'; // Lagaðu slóðina ef þarf
 import 'firebase/auth';
 
+// Initialize Firebase með gefnum stillingum
 firebase.initializeApp(firebaseConfig);
 
+// Skilgreina fall sem sýnir login-formið
 const Login = () => {
+  // Tveir stöðu breytur fyrir netfang og lykilorð
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  // Fall sem keyrir þegar ýtt er á "Login" hnappinn
   const handleLogin = async () => {
     try {
+      // Innskrá notanda með gefnum upplýsingum
       const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
       const user = userCredential.user;
       console.log('Logged in user:', user);
-      // You can add further logic like redirecting to a different page upon successful login
+      // Hægt er að bæta við fleiri virkni, eins og að senda notanda á önnur síðu eftir vel heppnaða innskráningu
     } catch (error) {
       console.error('Error during login:', error.message);
-      // Handle login error, e.g., display an error message to the user
+      // Meðhöndla innskráningarvillu, til dæmis með því að sýna villuskilaboð notanda
     }
   };
 
+  // Breyta sem stjórnar sýningu login-forms
   const [showLogin, setShowLogin] = useState(false);
 
+  // Fall sem sýnir/felur login-formið
   const toggleShowLogin = () => {
     setShowLogin(!showLogin);
   };
@@ -36,72 +44,81 @@ const Login = () => {
         <div className="login-container">
           <h2>Login</h2>
           <div className="input-group">
-            <label htmlFor="username">Username:</label>
+            <label htmlFor="username">Netfang:</label>
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div className="input-group">
-            <label htmlFor="password">Password:</label>
+            <label htmlFor="password">Lykilorð:</label>
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
           <button className="login-btn" onClick={handleLogin}>Login</button>
-          <button className="cancel-btn" onClick={() => setShowLogin(false)}>Cancel</button>
+          <button className="cancel-btn" onClick={() => setShowLogin(false)}>Hætta við</button>
         </div>
       ) : (
         <div className="loginDesk" id="login-button" onClick={toggleShowLogin}>
-          <a href="#">LOGIN</a>
+          <a href="#">INNSKRÁ</a>
         </div>
       )}
     </div>
   );
 };
 
+// Fall sem sýnir aðalútlitið
 function App() {
+  // Breyta sem stjórnar því hvort við erum á símasníði eða stöðvum útliti
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const handleResize = () => setIsMobile(window.innerWidth <= 768);
   const [geojsonData, setGeojsonData] = useState(null);
   const [showDiv, setShowDiv] = useState(false);
   const myElement = document.getElementById('marker');
 
+  // Fall sem keyrir þegar ýtt er á marki á kortinu
   const handleMarkerClick = () => {
-    console.log('Marker pressed!');
-    // Add your custom logic here
+    console.log('Merki ýtt á!');
+    // Bættu við eigin virkni hér
   };
 
+  // Fall sem sýnir/felur valmynd um að parka
   const toggleShowDiv = () => setShowDiv(!showDiv);
 
+  // Fall sem felur valmyndina
   const confirmChoice = () => {
     setShowDiv(false);
   };
 
+  // Nota useEffect til að hlusta á stærð glugga
   useEffect(() => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Sækja GeoJSON gögn þegar komponenti er fyrst renderaður
   useEffect(() => {
     setGeojsonData(parkstadi);
   }, []);
 
+  // Sækja GeoJSON gögn frá vefþjóni
   useEffect(() => {
     const fetchGeoJSON = async () => {
       try {
         const response = await fetch("parkstadi.json");
 
         if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
+          throw new Error(`HTTP villa! Stöða: ${response.status}`);
         }
 
         const data = await response.json();
         setGeojsonData(data);
-        console.log('GeoJSON data loaded:', data);
+        console.log('GeoJSON gögn hlaðin:', data);
       } catch (error) {
-        console.log('Error fetching GeoJSON data:', error);
+        console.log('Villa við að sækja GeoJSON gögn:', error);
       }
     };
 
     fetchGeoJSON();
   }, []);
 
+  // Hlusta á ýmis atburði á merki, til að bæta við eigin virkni
   useEffect(() => {
     if (myElement) {
       myElement.addEventListener('click', handleMarkerClick);
@@ -118,9 +135,9 @@ function App() {
     <div>
       {isMobile ? (
         <>
-          <h1>This is a mobile view</h1>
+          <h1>Þetta er símasniðsútlit</h1>
           <div className="mobile-view">
-            {/* ... (your existing mobile view JSX code) */}
+            {/* ... (þitt núverandi JSX kóði fyrir símasniðsútlitið) */}
             <MapContainer
               center={[64.09, -21.8652]}
               zoom={12}
@@ -132,20 +149,20 @@ function App() {
             >
               <TileLayer
                 url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='© OpenStreetMap contributors'
+                attribution='© OpenStreetMap aðilar'
               />
-              {/* ... (other map components) */}
+              {/* ... (annar kortahluti) */}
               <Marker id="marker" onClick={handleMarkerClick}>
                 {geojsonData && <GeoJSON data={geojsonData} />}
                 <Popup>
-                  {/* ... (Popup content) */}
+                  {/* ... (Efni í Popup glugga) */}
                 </Popup>
               </Marker>
-              {/* ... (your existing MapContainer JSX code) */}
+              {/* ... (þitt núverandi JSX kóði fyrir MapContainer) */}
               <div>
                 {showDiv ? (
                   <div className="parkmenu container">
-                    {/* ... (your existing mobile view parkmenu JSX code) */}
+                    {/* ... (þitt núverandi JSX kóði fyrir parkmenu á símasniði) */}
                   </div>
                 ) : (
                   <div
@@ -153,7 +170,7 @@ function App() {
                     id="park-button"
                     onClick={toggleShowDiv}
                   >
-                    <a href="#">PARK</a>
+                    <a href="#">PARKERA</a>
                   </div>
                 )}
               </div>
@@ -163,7 +180,7 @@ function App() {
       ) : (
         <div className='container'>
           <div className="desktop-view flex flex-row" id="map">
-            {/* ... (your existing desktop view JSX code) */}
+            {/* ... (þitt núverandi JSX kóði fyrir stöðvutúlitið) */}
             <MapContainer
               center={[64.09, -21.8652]}
               zoom={12}
@@ -171,29 +188,29 @@ function App() {
             >
               <TileLayer
                 url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='© OpenStreetMap contributors'
+                attribution='© OpenStreetMap aðilar'
               />
               {geojsonData && <GeoJSON data={geojsonData} />}
             </MapContainer>
-            {/* ... (your existing desktop view JSX code) */}
+            {/* ... (þitt núverandi JSX kóði fyrir stöðvutúlitið) */}
             <div className="">
               {showDiv ? (
                 <div className="parkmenuDesk container">
                   <div className="" id="time">
-                    <a href="#">TIME</a>
+                    <a href="#">TÍMI</a>
                   </div>
                   <div className="" id="date">
-                    <a href="#">DATE</a>
+                    <a href="#">DAGSETNING</a>
                   </div>
                   <div
                     className=""
                     id="cancel"
                     onClick={() => setShowDiv(false)}
                   >
-                    <a href="#">CANCEL</a>
+                    <a href="#">HÆTTA</a>
                   </div>
                   <div className="" id="confirm" onClick={confirmChoice}>
-                    <a href="#">CONFIRM</a>
+                    <a href="#">STAÐFESTA</a>
                   </div>
                 </div>
               ) : (
@@ -202,7 +219,7 @@ function App() {
                   id="park-button"
                   onClick={toggleShowDiv}
                 >
-                  <a href="#">PARK</a>
+                  <a href="#">PARKERA</a>
                 </div>
               )}
               <div>
@@ -217,7 +234,7 @@ function App() {
               >
                 <TileLayer
                   url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  attribution='© OpenStreetMap contributors'
+                  attribution='© OpenStreetMap aðilar'
                 />
                 {geojsonData && <GeoJSON data={geojsonData} />}
               </MapContainer>
