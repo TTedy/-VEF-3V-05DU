@@ -34,6 +34,7 @@ function App() {
   };
   
 
+  
   const handleMarkerDrag = (event) => {
     // i need the data for the marker position
     // so i need the setpincoords
@@ -41,6 +42,29 @@ function App() {
       console.log('Marker Position:', event.target.getLatLng());
     }
   };
+  // Assuming you have some code that gets the coordinates and triggers this function
+function handleMarkerClick(event) {
+  // Extracting the coordinates from the event
+  const { lat, lng } = event.latlng;
+
+  // Saving the coordinates in a variable, array, or any data structure you prefer
+  const savedCoords = { lat, lng };
+
+  // Logging the coordinates to the console
+  console.log('Clicked Marker Coordinates:', savedCoords);
+}
+
+// Example usage with a dummy event object (you would trigger this in your actual application)
+const dummyEvent = {
+  latlng: {
+    lat: 40.7128, // Replace with actual latitude
+    lng: -74.0060, // Replace with actual longitude
+  },
+};
+
+// Triggering the handleMarkerClick function with the dummy event
+handleMarkerClick(dummyEvent);
+
 
   const handleLogin = () => {
     correctLogin();
@@ -242,6 +266,9 @@ function App() {
 
                 {geojsonData && <GeoJSON data={geojsonData} />}
 
+                <Marker position={pinCoords} onClick={handleMarkerClick}>
+                  <Popup>A popup!</Popup>
+                </Marker>
 
               </MapContainer>
             </div>
