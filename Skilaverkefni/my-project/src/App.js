@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, GeoJSON, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -79,23 +80,6 @@ handleMarkerClick(dummyEvent);
   };
 
   {isLoggedIn && <span className="checkmark">placeholder</span>}
-
-
-
- /*
-  useEffect(() => {
-    const logMarkerPosition = setInterval(() => {
-      console.log('Marker Position:', setPinCoords);
-    }, 1000);
-
-    return () => clearInterval(logMarkerPosition);
-  }, [setPinCoords]);
-  
-  */
-
-
-
-
 
 
   useEffect(() => {
@@ -265,10 +249,6 @@ handleMarkerClick(dummyEvent);
                 />
 
                 {geojsonData && <GeoJSON data={geojsonData} />}
-
-                <Marker position={pinCoords} onClick={handleMarkerClick}>
-                  <Popup>A popup!</Popup>
-                </Marker>
 
               </MapContainer>
             </div>
