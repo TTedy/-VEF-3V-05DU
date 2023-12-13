@@ -15,56 +15,20 @@ function App() {
   const [geojsonData, setGeojsonData] = useState(null);
   const [showDiv, setShowDiv] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
-
   const [pinCoords, setPinCoords] = useState({ lat: 64.09, lng: -21.8652 });
-
-
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-
-
-
   const toggleShowDiv = () => setShowDiv(!showDiv);
-  const confirmChoice = () => {
-    // You can use pinCoords here
-    console.log(pinCoords);
-    setShowDiv(false);
-  };
   
-
   
-  const handleMarkerDrag = (event) => {
-    // i need the data for the marker position
-    // so i need the setpincoords
-    if (event.target && event.target.getLatLng) {
-      console.log('Marker Position:', event.target.getLatLng());
+  const handleMarkerClick = (parkAreaId) => {
+    console.log(parkAreaId)
+    if (confirmed && isLoggedIn) {
+      console.log("User:", email);
+      console.log("Confirmed Park Area ID:", parkAreaId);
     }
   };
-  // Assuming you have some code that gets the coordinates and triggers this function
-function handleMarkerClick(event) {
-  // Extracting the coordinates from the event
-  const { lat, lng } = event.latlng;
-
-  // Saving the coordinates in a variable, array, or any data structure you prefer
-  const savedCoords = { lat, lng };
-
-  // Logging the coordinates to the console
-  console.log('Clicked Marker Coordinates:', savedCoords);
-}
-
-// Example usage with a dummy event object (you would trigger this in your actual application)
-const dummyEvent = {
-  latlng: {
-    lat: 40.7128, // Replace with actual latitude
-    lng: -74.0060, // Replace with actual longitude
-  },
-};
-
-// Triggering the handleMarkerClick function with the dummy event
-handleMarkerClick(dummyEvent);
 
 
   const handleLogin = () => {
@@ -74,10 +38,19 @@ handleMarkerClick(dummyEvent);
   const correctLogin = () => {
     if (email === "gammi@gmail.com" && password === "123456") {
       console.log("Login successful");
+      const loggedInUser = {
+        email: email,
+      };
       setIsLoggedIn(true);
-      setShowLogin(false);
+      setShowLogin(false); // Fix: Use setShowLogin to hide the login form
     }
   };
+
+  const confirmChoice = () => {
+    setConfirmed(true);
+    setShowDiv(false);
+  };
+
 
   {isLoggedIn && <span className="checkmark">placeholder</span>}
 
@@ -137,9 +110,8 @@ handleMarkerClick(dummyEvent);
               zoom={12}
               markerPosition={pinCoords}
               showDiv={showDiv}
-              onMarkerDrag={handleMarkerDrag}
               onToggleShowDiv={toggleShowDiv}
-              onConfirmChoice={confirmChoice}
+              onConfirmChoice={handleMarkerClick}
               geojsonData={geojsonData}
             >
               <TileLayer
@@ -148,10 +120,6 @@ handleMarkerClick(dummyEvent);
               />
 
               {geojsonData && <GeoJSON data={geojsonData} />}
-
-              <Marker position={pinCoords} draggable={true} onDrag={handleMarkerDrag}>
-                <Popup>A popup!</Popup>
-              </Marker>
 
               <div>
                 {showDiv ? (
@@ -195,7 +163,7 @@ handleMarkerClick(dummyEvent);
                   >
                     <a href="#">CANCEL</a>
                   </div>
-                  <div className="" id="confirm" onClick={confirmChoice}>
+                  <div className="" id="confirm" onClick={handleMarkerClick}>
                     <a href="#">CONFIRM</a>
                   </div>
                 </div>
@@ -248,7 +216,27 @@ handleMarkerClick(dummyEvent);
                   attribution='© OpenStreetMap contributors'
                 />
 
-                {geojsonData && <GeoJSON data={geojsonData} />}
+              // Inside the MapContainer component
+              {geojsonData &&
+                geojsonData.features.map((feature, index) => (
+                  <Marker
+                    key={index}
+                    position={[feature.geometry.coordinates[1], feature.geometry.coordinates[0]]}
+                    draggable={true}
+                    onClick={() => handleMarkerClick(feature.properties.parkarea_id)}
+                  >
+                    <Popup>
+                      <div>
+                        <h3>{feature.properties.name}</h3>
+                        <p>Park Area ID: {feature.properties.parkarea_id}</p>
+                      </div>
+                    </Popup>
+                  </Marker>
+                ))}
+
+
+                
+
 
               </MapContainer>
             </div>

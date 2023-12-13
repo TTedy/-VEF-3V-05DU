@@ -49,10 +49,13 @@ html {
 }
 
 .mapContainer {
-  height: 100%;
-  width: 100%;
   position: absolute;
+  width: 65%; /* Set the width to 100% */
+  max-width: 100vw;
+  height: 100vh;
 }
+
+
 
 .buttonLink {
   color: white;
@@ -213,5 +216,4 @@ html {
   cursor: pointer;
   width: 100%;
 }
-
 

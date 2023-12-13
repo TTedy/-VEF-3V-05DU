@@ -4,8 +4,8 @@
       {
         "type": "Feature",
         "properties": {
-          "parkarea_id": "T2",
-          "name": "Hádegisvegur"
+          "parkarea_id": "T1",
+          "name": "Hátegisvegur"
         },
         "geometry": {
           "type": "Point",
@@ -15,12 +15,23 @@
       {
         "type": "Feature",
         "properties": {
-          "parkarea_id": "T1",
+          "parkarea_id": "T2",
           "name": "skolaverðaholt"
         },
         "geometry": {
           "type": "Point",
           "coordinates": [-21.925888, 64.141991]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "parkarea_id": "T3",
+          "name": "Hafnafjörður"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-21.94411,64.07569 ]
         }
       }
     ]
